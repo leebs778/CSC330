@@ -6,7 +6,7 @@
 
 (* Place your tests at the end of the file *)
 
-use "hw2-sol.sml";
+use "hw2.sml";
 
 val test1_1=all_except_option("3",["4","9","10"]) = NONE
 val test1_2=all_except_option("3",["4","9","3","10"]) = SOME ["4","9","10"]
@@ -36,7 +36,7 @@ val test3_2=get_substitutions2([["Fred","Fredrick"],["Jeff","Jeffrey"],["Geoff",
 val test3_3=get_substitutions2([["Neo","New"],["Panzer","Tank","Sherman"],["Tank", "Container"],["Epoch","Era"]],
                                "Tank")
             = ["Panzer","Sherman","Container"]
-val test3_4=get_substitutions1([["Neo","New", "Nuovo"],["Panzer","Tank","Sherman"],["Tank", "Container"],["Epoch","Era"]],
+val test3_4=get_substitutions2([["Neo","New", "Nuovo"],["Panzer","Tank","Sherman"],["Tank", "Container"],["Epoch","Era"]],
                                "Neo")
             = ["New","Nuovo"]
 
