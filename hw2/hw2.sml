@@ -71,20 +71,12 @@ exception IllegalMove
 (* put your solutions for Part 2 here *)
 (* TEST VALUES *)
 (* DELETE BEFORE SUBMISSION *)
-
+(*
 val ClubAce = (Clubs,Ace)
 val DiamondsJack = (Diamonds,Jack)
 val Hearts10 = (Hearts, Num 10)
 val Spades5 = (Spades,Num 5)
-
-exception notFound
-
-val cards1 = [(Clubs, Ace), (Diamonds, Num 10), (Spades, Num 4), (Clubs, Num 4)]
-val cards2 = []
-val cards3 = [(Clubs, Ace), (Diamonds, Num 10), (Spades, Num 5), (Clubs, Num 9)]
-val cards4 = [(Clubs, Ace), (Clubs, Num 10), (Clubs, Num 5), (Clubs, Num 2)]
-val cards5 = [(Diamonds, Ace), (Diamonds, Num 10), (Diamonds, Queen), (Diamonds, Jack), (Diamonds,King)]
-
+								*)
 
 (* 5 *)
 fun card_color(c: card): color =
@@ -132,11 +124,48 @@ fun all_same_color(cs: card list): bool =
 	end
 
 (* 9 *)
+fun sum_cards(cs: card list): int =
+	let
+		fun helper(cs, acc) =
+			case cs of 
+				[] => acc
+			|	x::xs => helper(xs, acc+card_value(x))
+	in
+		helper(cs, 0)
+	end
 
 (* 10 *)
+fun score(cs: card list, goal: int): int =
+	let
+		val sum = sum_cards(cs)
+		fun prelim (sum) = 
+			if (sum > goal) 
+			then 2 * (sum - goal)
+			else goal - sum
+	in
+		if (all_same_color(cs))
+		then prelim(sum) div 2
+		else prelim(sum)
+	end
+
 (* 11 *)
-
-
+fun officiate(cl: card list, ml: move list, goal: int): int =
+	let fun loop(cl: card list, hand: card list, ml: move list): int = 
+			if (sum_cards(hand) > goal)
+			then (score(hand, goal))
+			else 
+				(case ml of
+					[] => score(hand,goal)
+				| 	Discard card::tail => loop(cl,remove_card(hand,card,IllegalMove),tail)
+				|	Draw::tail =>( case cl of
+										[] => score(hand,goal) 		(* no cards left to draw*)
+									|	a::ab => loop(ab,a::hand,tail) 
+								) 
+									
+				)
+	in
+		loop(cl,[],ml)
+	end;
 
 
 
