@@ -1,7 +1,16 @@
 (* Tests for assignment 2 *)
 
 (*
- * Version 1.01 (fixed test7_1)
+ * Version 1.2
+*
+* Changelog:
+*
+* 2015-01-19  dmg  <dmg@uvic.ca>
+*	* fixed test11_10
+*
+* 2015-01-17  dmg  <dmg@uvic.ca>
+*	* fixed test7_1
+*
 *)
 
 (* Place your tests at the end of the file *)
@@ -15,7 +24,8 @@ val test1_4=all_except_option("3",["3","4","9","10"])  = SOME ["4","9","10"]
 val test1_5=all_except_option("3",["4","9","10","3"]) = SOME ["4","9","10"]
 val test1_6=all_except_option("3",["3"]) = SOME []
 
-val test2_1=get_substitutions1([["Fred","Fredrick"],["Elizabeth","Betty"],["Freddie","Fred","F"]],"Fred")
+val test2_1=get_substitutions1([["Fred","Fredrick"],["Elizabeth","Betty"],["Freddie","Fred","F"]],
+                               "Fred")
             = ["Fredrick","Freddie","F"]
 val test2_2=get_substitutions1([["Fred","Fredrick"],["Jeff","Jeffrey"],["Geoff","Jeff","Jeffrey"]],
                                "Jeff")
@@ -36,7 +46,7 @@ val test3_2=get_substitutions2([["Fred","Fredrick"],["Jeff","Jeffrey"],["Geoff",
 val test3_3=get_substitutions2([["Neo","New"],["Panzer","Tank","Sherman"],["Tank", "Container"],["Epoch","Era"]],
                                "Tank")
             = ["Panzer","Sherman","Container"]
-val test3_4=get_substitutions2([["Neo","New", "Nuovo"],["Panzer","Tank","Sherman"],["Tank", "Container"],["Epoch","Era"]],
+val test3_4=get_substitutions1([["Neo","New", "Nuovo"],["Panzer","Tank","Sherman"],["Tank", "Container"],["Epoch","Era"]],
                                "Neo")
             = ["New","Nuovo"]
 
@@ -84,7 +94,7 @@ val cards3 = [(Clubs, Ace), (Diamonds, Num 10), (Spades, Num 5), (Clubs, Num 9)]
 val cards4 = [(Clubs, Ace), (Clubs, Num 10), (Clubs, Num 5), (Clubs, Num 2)]
 val cards5 = [(Diamonds, Ace), (Diamonds, Num 10), (Diamonds, Queen), (Diamonds, Jack), (Diamonds,King)]
 
-val test7_1 = remove_card(cards3, (Clubs, Ace), notFound) = [(Diamonds,Num 10),(Spades,Num 4),(Clubs,Num 4)]
+val test7_1 = remove_card(cards3, (Clubs, Ace), notFound) = [(Diamonds,Num 10),(Spades,Num 5),(Clubs,Num 9)]
 val test7_2 = remove_card(cards1, (Spades, Num 4), notFound) = [(Clubs, Ace), (Diamonds, Num 10), (Clubs, Num 4)]
 val test7_3 = remove_card(cards3, (Clubs, Num 9), notFound) = [(Clubs,Ace),(Diamonds,Num 10),(Spades,Num 5)]
 val test7_4 = remove_card(cards5, (Diamonds, Ace), notFound) = [(Diamonds, Num 10), (Diamonds, Queen), (Diamonds, Jack), (Diamonds,King)]
@@ -118,7 +128,7 @@ val test11_6 = officiate(cards3, [Draw, Draw, Draw], 15) = 22
 val test11_7 = officiate(cards3, [Draw, Draw, Draw, Draw], 35) = 0
 val test11_8 = officiate(cards3, [Draw, Draw, Draw, Discard (Spades, Num 5)], 15) = 22
 val test11_9 = officiate(cards5, [Draw, Draw, Draw, Discard (Spades, Num 2)], 45) = 10 handle IllegalMove => true
-val test11_10 = officiate(cards2, [Draw], 10) = 0 handle IllegalMove => true
+val test11_10 = officiate(cards2, [Draw], 10) = 5
 val test11_11 = officiate(cards2, [Discard (Spades, Ace)], 10) = 5 handle IllegalMove => true
 val test11_12 = officiate(cards3, [Draw, Discard (Spades, Num 7)], 10) = 6  handle IllegalMove => true
 
