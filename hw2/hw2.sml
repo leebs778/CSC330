@@ -1,7 +1,6 @@
 (* if you use this function to compare two strings (returns true if the same
    string), then you avoid some warning regarding polymorphic comparison  *)
 
-
 fun same_string(s1 : string, s2 : string) =
     s1 = s2
 
@@ -160,7 +159,7 @@ fun officiate(cl: card list, ml: move list, goal: int): int =
 				|	Draw::tail =>( case cl of
 										[] => score(hand,goal) 		(* no cards left to draw*)
 									|	a::ab => loop(ab,a::hand,tail) 
-								) 
+								)
 									
 				)
 	in

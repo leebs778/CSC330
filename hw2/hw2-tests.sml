@@ -73,6 +73,7 @@ val ClubAce = (Clubs,Ace)
 val DiamondsJack = (Diamonds,Jack)
 val Hearts10 = (Hearts, Num 10)
 val Spades5 = (Spades,Num 5)
+val SpadesAce = (Spades,Ace)
 
 val test5_1= card_color(ClubAce) = Black
 val test5_2= card_color(DiamondsJack) = Red
@@ -135,3 +136,25 @@ val test11_12 = officiate(cards3, [Draw, Discard (Spades, Num 7)], 10) = 6  hand
 
 (*********************************************************************** *)
 (* Your tests go after this *)
+val test1_0 = all_except_option("10",["4","9","3","10"]) = SOME ["4","9","3"]
+val test2_0 = get_substitutions1([["Leebs","Peter", "Lebo"],["Elizabeth","Betty"],["Freddie","Fred","F"]],
+                               "Leebs")
+            = ["Peter", "Lebo"]
+val test3_0=get_substitutions2([["Mia","FlufferNutter", "Sweet Pear Half in Your Own Heavy Syrup"],["Elizabeth","Betty"],["Freddie","Fred","F"]],
+                               "FlufferNutter")
+            = ["Mia", "Sweet Pear Half in Your Own Heavy Syrup"]
+val test4_0=similar_names([
+                             ["Thomas", "Neo"],
+                             ["Batman", "Hulk","Bruce"],
+                             ["Mike", "Scrilla"]
+                         ], {first="Mike", middle = "(whoknows)", last="Jones"}) =
+            [{first="Mike",last="Jones",middle="(whoknows)"},
+             {first="Scrilla",last="Jones",middle="(whoknows)"}]
+val test5_0= card_color(SpadesAce) = Black
+val test6_0= card_value(SpadesAce) = 11
+
+
+
+
+
+
