@@ -6,8 +6,8 @@ fun same_string(s1 : string, s2 : string) =
 
 (* put your solutions for Part 1 here *)
 
+
 (* 1 *) 
-(* Clean up! *)
 fun all_except_option(s1: string, l1: string list): string list option = 
 	case l1 of
 		[] => NONE
@@ -165,17 +165,3 @@ fun officiate(cl: card list, ml: move list, goal: int): int =
 	in
 		loop(cl,[],ml)
 	end;
-
-
-
-
-
-
-
-
-
-
-
-
-
-

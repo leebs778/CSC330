@@ -1,9 +1,12 @@
 (* Tests for assignment 2 *)
 
 (*
- * Version 1.2
+ * Version 1.3
 *
 * Changelog:
+* 2015-01-20  dmg  <dmg@uvic.ca>
+*       * fixed test11_6, test11_8, test11_12 (game should stop when the sum
+*          of the cards---not the score--is above the goal)
 *
 * 2015-01-19  dmg  <dmg@uvic.ca>
 *	* fixed test11_10
@@ -73,7 +76,7 @@ val ClubAce = (Clubs,Ace)
 val DiamondsJack = (Diamonds,Jack)
 val Hearts10 = (Hearts, Num 10)
 val Spades5 = (Spades,Num 5)
-val SpadesAce = (Spades,Ace)
+val SpadesAce = (Spades, Ace)
 
 val test5_1= card_color(ClubAce) = Black
 val test5_2= card_color(DiamondsJack) = Red
@@ -94,6 +97,7 @@ val cards2 = []
 val cards3 = [(Clubs, Ace), (Diamonds, Num 10), (Spades, Num 5), (Clubs, Num 9)]
 val cards4 = [(Clubs, Ace), (Clubs, Num 10), (Clubs, Num 5), (Clubs, Num 2)]
 val cards5 = [(Diamonds, Ace), (Diamonds, Num 10), (Diamonds, Queen), (Diamonds, Jack), (Diamonds,King)]
+val cards6 = [(Spades, Num 5), (Hearts, Num 5)]
 
 val test7_1 = remove_card(cards3, (Clubs, Ace), notFound) = [(Diamonds,Num 10),(Spades,Num 5),(Clubs,Num 9)]
 val test7_2 = remove_card(cards1, (Spades, Num 4), notFound) = [(Clubs, Ace), (Diamonds, Num 10), (Clubs, Num 4)]
@@ -106,6 +110,7 @@ val test8_2 = all_same_color(cards2) = true
 val test8_3 = all_same_color(cards3) = false
 val test8_4 = all_same_color(cards5) = true
 val test8_5 = all_same_color(cards5) = true
+
 
 val test9_1 = sum_cards(cards1) = 29
 val test9_2 = sum_cards(cards2) = 0
@@ -125,17 +130,18 @@ val test11_2 = officiate(cards3, [Draw], 10) = 1
 val test11_3 = officiate(cards3, [Draw], 5) = 6
 val test11_4 = officiate(cards5, [Draw, Draw], 0) = 11
 val test11_5 = officiate(cards3, [Draw, Draw], 15) = 12
-val test11_6 = officiate(cards3, [Draw, Draw, Draw], 15) = 22
+val test11_6 = officiate(cards3, [Draw, Draw, Draw], 15) = 12
 val test11_7 = officiate(cards3, [Draw, Draw, Draw, Draw], 35) = 0
-val test11_8 = officiate(cards3, [Draw, Draw, Draw, Discard (Spades, Num 5)], 15) = 22
+val test11_8 = officiate(cards3, [Draw, Draw, Draw, Discard (Spades, Num 5)], 15) = 12
 val test11_9 = officiate(cards5, [Draw, Draw, Draw, Discard (Spades, Num 2)], 45) = 10 handle IllegalMove => true
 val test11_10 = officiate(cards2, [Draw], 10) = 5
 val test11_11 = officiate(cards2, [Discard (Spades, Ace)], 10) = 5 handle IllegalMove => true
-val test11_12 = officiate(cards3, [Draw, Discard (Spades, Num 7)], 10) = 6  handle IllegalMove => true
-
+val test11_12 = officiate(cards3, [Draw, Discard (Spades, Num 7)], 10) = 1
 
 (*********************************************************************** *)
 (* Your tests go after this *)
+
+
 val test1_0 = all_except_option("10",["4","9","3","10"]) = SOME ["4","9","3"]
 val test2_0 = get_substitutions1([["Leebs","Peter", "Lebo"],["Elizabeth","Betty"],["Freddie","Fred","F"]],
                                "Leebs")
@@ -152,9 +158,10 @@ val test4_0=similar_names([
              {first="Scrilla",last="Jones",middle="(whoknows)"}]
 val test5_0= card_color(SpadesAce) = Black
 val test6_0= card_value(SpadesAce) = 11
-
-
-
-
+val test7_0 = remove_card(cards3, (Diamonds, Num 10), notFound) = [(Clubs, Ace),(Spades,Num 5),(Clubs,Num 9)]
+val test8_0 = all_same_color(cards6) = false
+val test9_0 = sum_cards(cards6) = 10
+val test10_0 = score(cards6, 20) = 10
+val test11_0 = officiate(cards6, [], 10) = 5
 
 
