@@ -30,3 +30,9 @@ fun g f1 f2 p =
 
 
 (**** put all your code after this line ****)
+
+(* Assignment done by Peter Lebo for Daniel German's CSC 330 offering in Spring 2015 at UVic *)
+(* Last edited 1/25/15 *)
+
+fun only_capitals (l1: string list): string list = 
+	List.filter (fn l2 => Char.isUpper(String.sub((l2),0))) l1

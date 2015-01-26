@@ -80,6 +80,8 @@ fun test_only_capitals() =
         )
   end
 
+(* (* 
+
 val lwords = ["This","the","A","Hello","World","not","long string","loooong string"]
 val swords = ["the","not","cat","dog"] (* check first/last etc *)
 
@@ -363,6 +365,9 @@ val all_tests =
      test_match,
      test_first_match
      ]
+*)*)
+val all_tests =
+    [test_only_capitals]
 
 fun run() =
     let
