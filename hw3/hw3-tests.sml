@@ -104,7 +104,6 @@ fun test_longest_string2() =
           {actual=longest_string2(["Mexico","Ottawa"]), expected="Ottawa"},
           {actual=longest_string2(swords), expected="dog"}
         ])
-(* (* 
 fun test_longest_string3() =
     test("test_longest_string3",[
           {actual=longest_string3(lwords), expected="loooong string"},
@@ -190,6 +189,7 @@ fun test_count_wildcards () =
      {actual=count_wildcards(TupleP [ConstructorP ("a", Wildcard), TupleP [Wildcard]]),
       expected=2}])
 
+
 fun test_count_some_var() =
   test("count_some_var",
        [{actual=count_some_var("test",
@@ -214,7 +214,7 @@ fun test_check_pat() =
                             Wildcard,ConstP 3,
                             ConstructorP("cony",Variable "test")]),
            expected=true}])
-
+(*
 fun test_match() =
     test("test_match",
          [{actual=match(Unit, UnitP),
@@ -348,6 +348,14 @@ fun test_first_match() =
            ]}
         ])
 
+
+val all_tests =
+    [test_longest_string3,
+     test_longest_string4,
+     test_match,
+     test_first_match
+     ]
+*)
 val all_tests =
     [test_only_capitals,
      test_longest_string1,
@@ -359,17 +367,9 @@ val all_tests =
      test_first_answer,
      test_first_answer_exc,
      test_all_answers,
-     test_count_wildcards ,
+     test_count_wildcards,
      test_count_some_var,
-     test_check_pat,
-     test_match,
-     test_first_match
-     ]
-*)*)
-val all_tests =
-    [test_only_capitals,
-     test_longest_string1,
-     test_longest_string2]
+     test_check_pat]
 
 fun run() =
     let
